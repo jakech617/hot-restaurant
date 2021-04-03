@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const reservations = [];
-const waitData = [];
+let reservations = [];
+let waitData = [];
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
@@ -33,6 +33,12 @@ app.post("/api/tables", (req, res) => {
 	}
   console.log(waitData);
 });
+
+app.post('/api/clear', (req, res) => {
+	reservations = [];
+	waitData = [];
+	res.json('')
+})
 
 app.get("/tables", (req, res) => {
   res.sendFile(path.join(__dirname, "tables.html"));
