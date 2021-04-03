@@ -21,7 +21,6 @@ app.get("/reserve", (req, res) => {
 app.post("/reserve", (req, res) => {
   const newReservation = req.body;
 
-  newReservation.name = newReservation.name.replace(/\s+/g, "");
   console.log(newReservation);
 
   reservations.push(newReservation);
