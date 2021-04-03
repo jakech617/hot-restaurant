@@ -22,10 +22,16 @@ app.post("/api/tables", (req, res) => {
   const newReservation = req.body;
 
   console.log(newReservation);
-
-  waitData.push(newReservation);
+	if(reservations.length < 2) {
+		reservations.push(newReservation)
+		res.send(true);
+	  res.json(newReservation);
+	} else {
+	  waitData.push(newReservation);
+		res.send(false);
+		res.json(newReservation);
+	}
   console.log(waitData);
-  res.json(newReservation);
 });
 
 app.get("/tables", (req, res) => {
@@ -33,7 +39,7 @@ app.get("/tables", (req, res) => {
 });
 
 app.get("/api/tables", (req, res) => {
-  res.json(reservations);
+  res.json(reservations);	
 });
 
 app.get("/api/waitlist", (req, res) => {
