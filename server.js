@@ -22,30 +22,30 @@ app.post("/api/tables", (req, res) => {
   const newReservation = req.body;
 
   console.log(newReservation);
-	if(reservations.length < 2) {
-		reservations.push(newReservation)
-		res.send(true);
-	  res.json(newReservation);
-	} else {
-	  waitData.push(newReservation);
-		res.send(false);
-		res.json(newReservation);
-	}
+  if (reservations.length < 5) {
+    reservations.push(newReservation);
+    res.send(true);
+    res.json(newReservation);
+  } else {
+    waitData.push(newReservation);
+    res.send(false);
+    res.json(newReservation);
+  }
   console.log(waitData);
 });
 
-app.post('/api/clear', (req, res) => {
-	reservations = [];
-	waitData = [];
-	res.json('')
-})
+app.post("/api/clear", (req, res) => {
+  reservations = [];
+  waitData = [];
+  res.json("");
+});
 
 app.get("/tables", (req, res) => {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
 app.get("/api/tables", (req, res) => {
-  res.json(reservations);	
+  res.json(reservations);
 });
 
 app.get("/api/waitlist", (req, res) => {
